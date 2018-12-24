@@ -54,6 +54,7 @@ def metric_max_over_ground_truths(metric_fn, prediction, ground_truths):
 
 def evaluate(dataset, predictions):
     f1 = exact_match = total = 0
+    per_ex_dump = {}
     for article in dataset:
         for paragraph in article['paragraphs']:
             for qa in paragraph['qas']:
@@ -67,13 +68,32 @@ def evaluate(dataset, predictions):
                 total += 1
                 ground_truths = list(map(lambda x: x['text'], qa['answers']))
                 prediction = predictions[qa['id']][0]
-                exact_match += metric_max_over_ground_truths(
+                single_em = metric_max_over_ground_truths(
                     exact_match_score, prediction, ground_truths)
-                f1 += metric_max_over_ground_truths(
+                single_f1 = metric_max_over_ground_truths(
                     f1_score, prediction, ground_truths)
+
+                exact_match += single_em
+                f1 += single_f1
+
+                # exact_match += metric_max_over_ground_truths(
+                #     exact_match_score, prediction, ground_truths)
+                # f1 += metric_max_over_ground_truths(
+                #     f1_score, prediction, ground_truths)
+                
+                per_ex_dump[qa['id']] = {
+                    'question': qa['question'],
+                    'ground_truths': ground_truths,
+                    'prediction': predictions[qa['id']][0],
+                    'exact_match': int(single_em),
+                    'f1': single_f1,
+                }
 
     exact_match = 100.0 * exact_match / total
     f1 = 100.0 * f1 / total
+
+    with open('per_ex_pred.json', 'w') as f:
+        json.dump(per_ex_dump, f)
 
     return {'exact_match': exact_match, 'f1': f1}
 
