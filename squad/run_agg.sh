@@ -4,17 +4,17 @@
 # TEST_PATH=preds/tfidf_weighting/baseline/3e+1
 # TEST_PATH=preds/tfidf_weighting/bert/3e+1
 # TEST_PATH=preds/tfidf_weighting/bert_large/3e+4
-# TEST_PATH=preds/top_n_docs/baseline/10
-TEST_PATH=preds/top_n_docs/bert/10
-# TEST_PATH=preds/top_n_docs/bert_large/3
+# TEST_PATH=preds/top_n_docs/baseline/30
+# TEST_PATH=preds/top_n_docs/bert/30
+TEST_PATH=preds/top_n_docs/bert_large/30
 
 mkdir -p $TEST_PATH
 rm -rf $TEST_PATH/*
 cd $TEST_PATH
 
-SESS=(1128 1180 1130 1131 1132) 
+# SESS=(1206 1207 1272 1209 1210) 
 # for i in ${SESS[@]}
-for i in $(seq 1226 1230)
+for i in $(seq 1266 1270)
 do
   nsml download -s /app/preds/agg_pred.json piqateam/squad_piqa_nfs/$i ./
 done
