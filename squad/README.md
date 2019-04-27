@@ -190,7 +190,7 @@ For time- and memory-efficient similarity search, additionally give following fl
 
 
 ## Submission
-Please see the [sample submission worksheet][worksheet-elmo] for instructions on how to submit a PI-SQuAD model for test set. In short, it should be a valid SQuAD submission, but in addition, it should meet the requirements described above. Please email `minjoon@cs.washington.edu` for the submission with both a link to the worksheet and a link to the prediction bundle. Whether it abides split-encode-merge pipeline will be first checked, and then will be forwarded to SQuAD v1.1 submission.
+Please see the [sample submission worksheet][worksheet-elmo] for instructions on how to submit a PI-SQuAD model for test set. In short, it should be a valid SQuAD submission, but in addition, it should meet the requirements described above. 
 
 
 
